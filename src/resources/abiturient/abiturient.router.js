@@ -1,14 +1,13 @@
-import { Router } from 'express';
+const express = require('express');
+const abiturientController = require('./abiturient.controller');
 
-import User from './user.model.js';
-import * as usersService from './user.service.js';
+const router = express.Router();
 
-const router = Router();
+router.get('/', abiturientController.getAllAbiturients);
+router.get('/:abiturientId', abiturientController.getAbiturientById);
+router.get('/:abiturientId/exams', abiturientController.getExamsByAbiturientId);
+router.post('/', abiturientController.createAbiturient);
+router.put('/:abiturientId', abiturientController.updateAbiturient);
+router.delete('/:abiturientId', abiturientController.deleteAbiturient);
 
-router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  // map user fields to exclude secret fields like "password"
-  res.json(users.map(User.toResponse));
-});
-
-export default router;
+module.exports = router;
