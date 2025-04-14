@@ -7,6 +7,11 @@ const app = express();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.path}`);
+    next();
+});
+
 app.use('/abiturients', abiturientRouter);
 app.use('/exams', examRouter);
 app.use('/teachers', teacherRouter);
