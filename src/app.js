@@ -1,19 +1,17 @@
-import express from 'express';
-
-import userRouter from './resources/users/user.router.js';
+const express = require('express');
+const abiturientRouter = require('./abiturient/abiturient.router');
+const examRouter = require('./exam/exam.router');
+const teacherRouter = require('./teacher/teacher.router');
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
+app.use('/abiturients', abiturientRouter);
+app.use('/exams', examRouter);
+app.use('/teachers', teacherRouter);
+
+const PORT = 4000;
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
 });
-
-app.use('/users', userRouter);
-
-export default app;
