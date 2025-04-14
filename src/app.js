@@ -21,6 +21,14 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`);
 });
 
+setTimeout(() => {
+    throw new Error('Test uncaught exception');
+}, 1000);
+
+setTimeout(() => {
+    Promise.reject('Test unhandled rejection');
+}, 1500);
+
 app.use('/abiturients', abiturientRouter);
 app.use('/exams', examRouter);
 app.use('/teachers', teacherRouter);
