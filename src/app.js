@@ -12,6 +12,15 @@ app.use((req, res, next) => {
     next();
 });
 
+process.on('uncaughtException', (err) => {
+    console.error(`There was an uncaught exception: ${err.message}`);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`);
+});
+
 app.use('/abiturients', abiturientRouter);
 app.use('/exams', examRouter);
 app.use('/teachers', teacherRouter);
