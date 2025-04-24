@@ -6,6 +6,8 @@ const teacherRouter = require('./teacher/teacher.router');
 const app = express();
 
 app.use(express.json());
+app.use(require('./middleware/auth.middleware'));
+app.use('/', require('./resources/auth/auth.router'));
 
 app.use((req, res, next) => {
     console.log(`Incoming request: ${req.method} ${req.path}`);

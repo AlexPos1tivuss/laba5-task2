@@ -34,3 +34,9 @@ model Exam {
   teacher     Teacher    @relation(fields: [teacherId], references: [id])
   teacherId   String
 }
+
+model Admin {
+  id       String @id @default(uuid())
+  login    String @unique
+  password String
+}
