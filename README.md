@@ -1,43 +1,57 @@
-# basic-nodejs-mitso
+
+# Basic NodeJS MITSO
 
 ## Prerequisites
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package
-  manager.
+- Node.js (v18 or later)
+- A Replit account
 
-## Downloading
+## Setup
 
-```
-git clone {repository URL}
-```
+1. Fork this Repl
+2. Create a new PostgreSQL database from the Database tab
+3. The database connection string will be automatically added to your environment variables
 
-## Installing NPM modules
+## Running the Application
 
-```
+1. Install dependencies:
+```bash
 npm install
 ```
 
-## Running application
-
-```
+2. Start the application:
+```bash
 npm start
 ```
 
-## Development
+The server will automatically restart on changes thanks to nodemon.
 
-If you're using VSCode, you can get a better developer experience from integration with
-[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and
-[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions.
+## Environment Variables
 
-### Auto-fix and format
+The following environment variables are required:
+- `DATABASE_URL`: PostgreSQL connection string (automatically set by Replit)
+- `PORT`: Application port (defaults to 4000)
+- `NODE_ENV`: Environment name (defaults to development)
+- `JWT_SECRET_KEY`: Secret key for JWT tokens
+
+## Project Structure
 
 ```
-npm run lint
+src/
+├── common/         # Common utilities and config
+├── resources/      # API resources
+│   ├── abiturient/
+│   ├── exam/
+│   └── teacher/
+└── app.js         # Express application setup
 ```
 
-### Debugging in VSCode
+## Logging
 
-Press <kbd>F5</kbd> to debug.
+Logs are stored in the `logs` directory:
+- `error.log`: Error-level logs
+- `combined.log`: All logs
 
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+## Database
+
+The application uses PostgreSQL provided by Replit. The database connection is automatically managed with connection pooling for better performance and reliability.

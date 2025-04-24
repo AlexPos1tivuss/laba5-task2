@@ -1,14 +1,29 @@
+
 import { createLogger, format, transports } from 'winston';
+import path from 'path';
+
+const logDir = path.join(process.cwd(), 'logs');
 
 const logger = createLogger({
   level: 'info',
   format: format.combine(
     format.timestamp(),
-    format.printf(({ timestamp, level, message }) => `${timestamp} [${level}]: ${message}`)
+    format.json()
   ),
   transports: [
-    new transports.File({ filename: 'logs/app.log' }),
-    new transports.File({ filename: 'logs/error.log', level: 'error' })
+    new transports.File({ 
+      filename: path.join(logDir, 'error.log'), 
+      level: 'error' 
+    }),
+    new transports.File({ 
+      filename: path.join(logDir, 'combined.log')
+    }),
+    new transports.Console({
+      format: format.combine(
+        format.colorize(),
+        format.simple()
+      )
+    })
   ]
 });
 
