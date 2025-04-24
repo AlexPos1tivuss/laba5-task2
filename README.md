@@ -54,4 +54,23 @@ Logs are stored in the `logs` directory:
 
 ## Database
 
-The application uses PostgreSQL provided by Replit. The database connection is automatically managed with connection pooling for better performance and reliability.
+The application uses PostgreSQL provided by Replit with Prisma ORM. The database connection is automatically managed with connection pooling for better performance and reliability.
+
+### Migrations
+
+To run database migrations:
+
+1. Generate a migration:
+```bash
+npx prisma migrate dev --name init
+```
+
+2. Apply migrations to production:
+```bash
+npx prisma migrate deploy
+```
+
+3. Generate Prisma Client:
+```bash
+npx prisma generate
+```
